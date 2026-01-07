@@ -1,26 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Visionneuse Markdown Joli</title>
+  <script src="https://cdn.jsdelivr.net/npm/markdown-it/dist/markdown-it.min.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      max-width: 800px;
+      margin: 30px auto;
+      background: #f7f7f7;
+      color: #333;
+      line-height: 1.6;
+    }
+    .md {
+      display: none; /* cache le Markdown brut */
+    }
+    .md-rendered {
+      background: #fff;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    h1, h2, h3 {
+      color: #222;
+    }
+    pre {
+      background: #272822;
+      color: #f8f8f2;
+      padding: 10px;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    code {
+      background: #eee;
+      padding: 2px 5px;
+      border-radius: 3px;
+    }
+    ul {
+      padding-left: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Markdown brut -->
 <div class="md">
-# Titre 1
-Du **Markdown** ici.
+# Bienvenue
+Voici un exemple de **Markdown** directement dans la page.
 </div>
 
 <div class="md">
-# Titre 2
-Encore du **Markdown** ici.
+## Deuxième Bloc
+- Item 1
+- Item 2
+- Item 3
 </div>
 
-<script src="markdown-it.min.js"></script>
+<div id="output-container"></div>
+
 <script>
   const md = window.markdownit();
   const mdElements = document.getElementsByClassName("md");
+  const outputContainer = document.getElementById("output-container");
 
-  for (let i = 0; i < mdElements.length; i++) {
-    // récupérer le contenu original
-    let content = mdElements[i].textContent;
+  function renderAll() {
+    outputContainer.innerHTML = ""; // vide le container
 
-    // ajouter 3 lignes directement dans la variable JS
+    for (let i = 0; i < mdElements.length; i++) {
+      const content = mdElements[i].textContent.trim();
 
-    // maintenant content contient ton Markdown original + 3 lignes
-    // tu peux le rendre ou le manipuler comme tu veux
-    console.log(content); // juste pour vérifier dans la console
+      // Créer un div pour le rendu Markdown
+      const div = document.createElement("div");
+      div.className = "md-rendered";
+      div.innerHTML = md.render(content);
+
+      outputContainer.appendChild(div);
+    }
   }
+
+  renderAll();
 </script>
+
+</body>
+</html>
