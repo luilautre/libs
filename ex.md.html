@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Visionneuse Markdown</title>
+</head>
+<body>
+
+<textarea id="md" rows="8" cols="50">
+# Titre
+Du **Markdown** ici.
+</textarea>
+
+<div id="out"></div>
+
+<script src="markdown-it.min.js"></script>
+<script>
+  const md = window.markdownit();
+
+  const input = document.getElementsByClassName("md");
+  const output = document.getElementById("out");
+
+  output.innerHTML = md.render(input.value);
+
+  input.addEventListener("input", () => {
+    output.innerHTML = md.render(input.value);
+  });
+</script>
+
+</body>
+</html>
