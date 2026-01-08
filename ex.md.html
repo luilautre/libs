@@ -2,8 +2,8 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8">
-  <title>Visionneuse Markdown Joli</title>
-  <script src="https://cdn.jsdelivr.net/npm/markdown-it/dist/markdown-it.min.js"></script>
+  <title>Visionneuse Markdown</title>
+  <script src="markdown-it.min.js"></script>
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -13,7 +13,7 @@
       line-height: 1.6;
     }
     .md {
-      display: none; /* cache le Markdown brut */
+      display: none;
     }
     .md-rendered {
       background: #fff;
@@ -24,46 +24,54 @@
       color: #222;
     }
     pre {
-      background: #272822;
-      color: #f8f8f2;
-      padding: 10px;
+      padding: 0px;
       border-radius: 5px;
       overflow-x: auto;
-    }
-    code {
-      background: #eee;
-      padding: 2px 5px;
-      border-radius: 3px;
     }
     ul {
       padding-left: 20px;
     }
   </style>
 </head>
-<body>
+<body id="body">
 
 <div class="md">
-# Bienvenue
-Voici un exemple de **Markdown** directement dans la page.
+# Un titre
+## Un titre de second niveau
+### Un titre de troisième niveau 
+#### Un titre de quatrième niveau
+##### Un  titre de cinquième niveau
+Un texte
+
+### Je peux le mettre en **gras**
+
+### Ou en _italique_
+
+ou **_les deux_**
+
+* Ceci
+* est
+* une
+* liste
 </div>
 
 <div class="md">
 ## Deuxième Bloc
 - Item 1
-- Item 2
+- Item *4*2
 - Item 3
+
+Tu peux cliquer [ici][luilautre.github.io] .
 </div>
 
-<div id="output-container"></div>
+<!-- <div id="output-container"></div> -->
 
 <script>
   const md = window.markdownit();
   const mdElements = document.getElementsByClassName("md");
-  const outputContainer = document.getElementById("output-container");
-
+  body = document.getElementById("body");
+  
   function renderAll() {
-    outputContainer.innerHTML = ""; // vide le container
-
     for (let i = 0; i < mdElements.length; i++) {
       const content = mdElements[i].textContent.trim();
 
@@ -72,7 +80,7 @@ Voici un exemple de **Markdown** directement dans la page.
       div.className = "md-rendered";
       div.innerHTML = md.render(content);
 
-      outputContainer.appendChild(div);
+      body.appendChild(div);
     }
   }
 
